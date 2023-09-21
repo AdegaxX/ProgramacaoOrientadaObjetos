@@ -1,7 +1,7 @@
 from conta import Conta
-from banco import Banco
 
-class ContaPoupanca:
+
+class ContaPoupanca(Conta):
     def __init__(self, numero):
         super().__init__(numero)
 
