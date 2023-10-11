@@ -1,7 +1,7 @@
 import unittest
 
-from src.dureza import Dureza
-from src.grafite import Grafite
+from ..src.dureza import Dureza
+from ..src.grafite import Grafite
 
 
 class TestGrafite(unittest.TestCase):
