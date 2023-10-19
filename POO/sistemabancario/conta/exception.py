@@ -6,4 +6,3 @@ class CIException(Exception):
 
     def numeroConta(self):
         return self.numero
-    
