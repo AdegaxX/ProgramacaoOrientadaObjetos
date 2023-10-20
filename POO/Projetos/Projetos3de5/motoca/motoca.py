@@ -1,4 +1,4 @@
-from Projetos3de5.motoca.pessoa import Pessoa
+from POO.Projetos.Projetos3de5.motoca.pessoa import Pessoa
 
 class Motoca:
 
