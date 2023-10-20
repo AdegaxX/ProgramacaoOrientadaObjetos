@@ -1,6 +1,8 @@
 from ..conta.conta import Conta
 from ..conta.contapoupanca import ContaPoupanca
 from ..conta.contaespecial import ContaEspecial
+from ..conta.exceptionSI import SIException
+from ..conta.exceptionCI import CIException
 
 
 class BancoList:
@@ -35,13 +37,15 @@ class BancoList:
 
 
     def debitar(self, numero, valor):
-        conta = self.procurar_conta(numero)
-        saldoso = Conta.get_saldo(numero)
-        if conta:
-            if saldoso > valor:
-                conta.debitar(valor)
-            else:
-                conta = None
+        try:
+            conta = self.procurarConta(numero)
+            conta.debitar(valor)
+
+        except CIException(numero) as errorci:
+            print(errorci)
+
+        except SIException(conta.get_saldo(), conta.get_numero()) as errorsi:
+            print(errorsi)
 
 
     def saldo(self, numero):
