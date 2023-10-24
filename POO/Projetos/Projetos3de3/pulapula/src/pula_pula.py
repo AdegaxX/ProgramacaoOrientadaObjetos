@@ -1,29 +1,50 @@
 from ..src.crianca import Crianca
-
-
 class PulaPula:
 
     def __init__(self, limiteMax):
-        pass
+        self.limeteMax = limiteMax
+
+        self.fila_de_espera = []
+        self.criancasPulando = []
+
+        self.conta = 0
+        self.caixa = 0
+
+
     def getFilaDeEspera(self):
-        return None
+        return self.fila_de_espera
 
     def getCriancasPulando(self):
-        return None
+        return self.criancasPulando
 
     def getLimiteMax(self):
-        return -1
+        return self.limeteMax
 
     def getCaixa(self):
-        return -1
+        return self.caixa
 
     def getConta(self, nome):
-        return None
+        for crianca in self.criancasPulando:
+            if crianca.nome == nome:
+                return self.conta
 
     def entrarNaFila(self, crianca: Crianca):
-        return True
+        if self.fila_de_espera:
+            if self.criancasPulando:
+                for crianca in self.criancasPulando:
+                    if crianca.nome != crianca.nome:
+                        self.fila_de_espera.append(crianca)
+                        return True
+                    return False
+            else:
+                self.fila_de_espera.append(crianca)
+        else:
+            self.fila_de_espera.insert(0, crianca)
+            return True
+
 
     def entrar(self):
+          
         return True
 
     def sair(self):
