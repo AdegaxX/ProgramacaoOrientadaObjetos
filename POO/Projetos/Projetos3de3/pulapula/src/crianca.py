@@ -3,7 +3,7 @@ class Crianca:
         self.nome = nome
         self.idade = idade
 
-    def getNome(self):
+    def getName(self):
         return self.nome
 
     def getIdade(self):
