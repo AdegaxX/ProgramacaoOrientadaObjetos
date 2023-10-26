@@ -73,14 +73,22 @@ class Topic:
 
     def descer(self, nome):
         if self.passPrioritario.count(None) == 0:
-            for i,passageiro in enumerate(self.passPrioritario):
+            for passageiro in enumerate(self.passPrioritario):
                 if passageiro.nome == nome:
                     self.passPrioritario.remove(passageiro)
                     self.vagas += 1
                     return True
             return False
-
-        return True
+        elif self.passNormais:
+            for passageiro in self.passNormais:
+                if passageiro and passageiro.nome == nome:
+                    self.passNormais.remove(passageiro)
+                    self.vagas += 1
+                    return True
+                return False
+        else:
+            print(f'Passageiro {nome} não encontrado!')
+            return False
 
 
     def toString(self):
