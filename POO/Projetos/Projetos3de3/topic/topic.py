@@ -1,4 +1,4 @@
-from ..src.passageiro import Passageiro
+from POO.Projetos.Projetos3de3.topic.passageiro import Passageiro
 
 
 class Topic:
@@ -13,15 +13,11 @@ class Topic:
 
 
     def getNumeroAssentosPrioritarios(self):
-        if self.qtdPrioritarios > self.capacidade:
-            return 'IllegalArgumentException'
-        else:
-            return self.qtdPrioritarios
+        return self.qtdPrioritarios
 
 
     def getNumeroAssentosNormais(self):
         return self.vagasNormais
-        print('\n')
 
 
     def getPassageiroAssentoNormal(self, lugar):
@@ -43,7 +39,7 @@ class Topic:
 
 
     def subir(self, passageiro: Passageiro):
-        if self.vagas > 0:
+        if self.passPrioritario.count(None) == 0 and self.passNormais.count(None) == 0:
             return False
         if passageiro.idade >= 65:
             if None in self.passPrioritario:
@@ -71,12 +67,13 @@ class Topic:
         return False
 
 
-    def descer(self, nome):
+    def descer(self, nome:str):
         if self.passPrioritario.count(None) == 0:
-            for passageiro in enumerate(self.passPrioritario):
-                if passageiro.nome == nome:
+            for passageiro in self.passPrioritario:
+                if passageiro and passageiro.nome == nome:
                     self.passPrioritario.remove(passageiro)
                     self.vagas += 1
+                    print(f'Passageiro {nome} desceu da cadeira preferencial.')
                     return True
             return False
         elif self.passNormais:
@@ -84,12 +81,24 @@ class Topic:
                 if passageiro and passageiro.nome == nome:
                     self.passNormais.remove(passageiro)
                     self.vagas += 1
+                    print(f'Passageiro {nome} desceu da cadeira normal.')
                     return True
-                return False
+            return False
         else:
             print(f'Passageiro {nome} não encontrado!')
             return False
 
 
     def toString(self):
-        pass
+        for passageiro in self.passPrioritario:
+            if passageiro != None:
+                self.strings.insert(0, '@' + passageiro.nome)
+            else:
+                self.strings.append('@')
+        for passageiro in self.passNormais:
+            if passageiro != None:
+                self.strings.append('=' + passageiro.nome)
+            else:
+                self.strings.append('=')
+        lista = ' '.join(self.strings)
+        return '[' + lista + ' ]'
