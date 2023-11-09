@@ -1,7 +1,7 @@
 import unittest
 
-from POO.Projetos.Projetos3de5.motoca.motoca import Motoca
-from POO.Projetos.Projetos3de5.motoca.pessoa import Pessoa
+from POO.Projetos.Proj_peso1.motoca.motoca import Motoca
+from POO.Projetos.Proj_peso1.motoca.pessoa import Pessoa
 
 
 class TesteMotoca(unittest.TestCase):

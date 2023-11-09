@@ -1,7 +1,7 @@
 import unittest
 
-from POO.Projetos.Projetos3de3.topic.passageiro import Passageiro
-from POO.Projetos.Projetos3de3.topic.topic import Topic
+from POO.Projetos.Proj_peso2.topic.passageiro import Passageiro
+from POO.Projetos.Proj_peso2.topic.topic import Topic
 
 
 class TestTopic(unittest.TestCase):

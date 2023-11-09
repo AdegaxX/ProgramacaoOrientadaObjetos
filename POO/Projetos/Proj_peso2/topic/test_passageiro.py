@@ -1,6 +1,6 @@
 import unittest
 
-from POO.Projetos.Projetos3de3.topic.passageiro import Passageiro
+from POO.Projetos.Proj_peso2.topic.passageiro import Passageiro
 
 
 class TestPassageiro (unittest.TestCase):
