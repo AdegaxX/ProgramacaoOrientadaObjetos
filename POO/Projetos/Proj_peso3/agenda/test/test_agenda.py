@@ -236,7 +236,7 @@ class TestAgenda(unittest.TestCase):
         self.assertTrue(agenda.adicionarContato(contato1),
                         "Deve ser possível adcionar um contato na lista de contatos se o nome ainda não existir.")
         self.assertEqual(2, agenda.getQuantidadeDeFones(Identificador.TRABALHO),
-                         "Deve ser possível pesquisar pela quantidade de fones com base nos identificador pesquisado.")
+                         "Deve ser possível pesquisar pela quantidade de fones com aluno nos identificador pesquisado.")
 
     def testQuantidadeTotalDeTelefones(self):
         agenda = Agenda()
