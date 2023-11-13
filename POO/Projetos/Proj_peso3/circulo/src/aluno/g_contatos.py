@@ -19,10 +19,10 @@ class GContatos(IContatosManager, ICirculosManager, ICirculoOperationsManager):
             self.contatos.append(contato)
             return True
         else:
-            raise Exception("Identificador de contato já existente")
+            return False
 
     def getAllContacts(self) -> list:
-        return None
+        return self.contatos
 
     def updateContact(self, contato: ContatoBase) -> bool:
         return False
@@ -33,10 +33,10 @@ class GContatos(IContatosManager, ICirculosManager, ICirculoOperationsManager):
             self.contatos.remove(contato)
             return True
         else:
-            raise ContatoNotFoundException("Contato não encontrado")
+            return False
 
     def getContact(self, id: str) -> ContatoBase:
-        return None
+        return self.contatos[id]
 
     def getNumberOfContacts(self) -> int:
         return 0
