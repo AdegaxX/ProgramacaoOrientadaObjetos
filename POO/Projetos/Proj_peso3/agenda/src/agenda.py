@@ -20,7 +20,6 @@ class Agenda:
         for contatos in self.contatos:
             if contatos.nome == nome:
                 return contatos
-        return None
 
 
     def adicionarContato(self, contato: Contato) -> bool:
@@ -55,11 +54,12 @@ class Agenda:
 
 
     def getQuantidadeDeFones(self, identificador: Identificador) -> int:
-        if identificador is None:
-            return sum(len(contato.getFones()) for contato in self.contatos)
-        else:
-            return sum(len([fone for fone in contato.getFones() if fone.identificador == identificador]) for contato in self.contatos)
-
+        num = 0
+        if identificador:
+            for id in self.contatos:
+                if id == identificador:
+                    num += 1
+            return num
 
     def getQuantidadeDeFones(self) -> int:
         return len(self.fones)
