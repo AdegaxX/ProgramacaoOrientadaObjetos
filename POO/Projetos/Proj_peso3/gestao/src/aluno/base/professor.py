@@ -10,7 +10,10 @@ class Professor(Funcionario):
 
     def calcular_salario_base(self):
         classes = {"A":3000, "B":5000, "C":7000, "D":9000, "E":11000}
-        return classes.get(self.classe, 0)
+        if classes:
+            return classes.get(self.classe, 0)
+        else:
+            return 'Classe inválida.'
 
     def calcular_diarias(self):
         return min(3, self.diarias) * 100
