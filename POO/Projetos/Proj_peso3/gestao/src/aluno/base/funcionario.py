@@ -4,9 +4,6 @@ class Funcionario:
         self.cpf = cpf
         self.nome = nome
         self.cargo = cargo
-        self.salario_base = 0
-        self.divisao_nos_lucros = 0
-        self.diarias = 0
 
 
     def getNome(self) -> str:
@@ -16,4 +13,4 @@ class Funcionario:
         return self.cpf
 
     def getSalario(self) -> float:
-        return self.salario
+        return 0.0

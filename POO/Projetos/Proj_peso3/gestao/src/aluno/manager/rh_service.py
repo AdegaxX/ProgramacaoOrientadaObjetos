@@ -10,6 +10,18 @@ class RHService(IRHService):
 
     def __init__(self):
         self.funcionarios = []
+        self.salarioSTA = 0
+        self.gratificacao = 0
+        self.folhaDePagamento = 0
+        self.terc_insalubre = 1500
+        self.salario_terc = 1000
+
+        # salarios dos profs:
+        self.profA = 3000
+        self.profB = 5000
+        self.profC = 7000
+        self.profD = 9000
+        self.profE = 11000
 
 
     def cadastrar(self, funcionario: Funcionario):
@@ -31,34 +43,33 @@ class RHService(IRHService):
 
 
     def remover(self, cpf: str):
-        funcionario = self.obterFuncionario(cpf)
-        if funcionario:
-            self.funcionarios.remove(funcionario)
-            return True
+        for cadastro in self.funcionarios:
+            if cadastro.cpf == cpf:
+                self.funcionarios.remove(cadastro)
+                return True
         return False
 
 
     def obterFuncionario(self, cpf: str):
-        return next((f for f in self.funcionarios if f.cpf == cpf), None)
+        for cadastro in self.funcionarios:
+            if cadastro.cpf == cpf:
+                return cadastro
+        return None
 
 
     def getFuncionarios(self):
-        return sorted(self.funcionarios, key=lambda f: f.nome)
+        return sorted(self.funcionarios, key=lambda funcionario: funcionario.nome)
 
 
     def getFuncionariosPorCategorias(self, tipo):
         if tipo == tipo.PROF:
-            funcionarios_do_tipo = [funcionario for funcionario in self.funcionarios if
-                                    isinstance(funcionario, Professor)]
+            funcionarios_do_tipo = [funcionario for funcionario in self.funcionarios if isinstance(funcionario, Professor)]
         elif tipo == tipo.STA:
             funcionarios_do_tipo = [funcionario for funcionario in self.funcionarios if isinstance(funcionario, STA)]
-
         elif tipo == tipo.TERC:
-            funcionarios_do_tipo = [funcionario for funcionario in self.funcionarios if
-                                    isinstance(funcionario, Terceirizado)]
+            funcionarios_do_tipo = [funcionario for funcionario in self.funcionarios if isinstance(funcionario, Terceirizado)]
         else:
-            return []  # Retornar uma lista vazia se o tipo não for reconhecido
-
+            return []
         funcionarios_do_tipo.sort(key=lambda x: x.nome)
         return funcionarios_do_tipo
 
@@ -66,36 +77,84 @@ class RHService(IRHService):
     def getTotalFuncionarios(self):
         return len(self.funcionarios)
 
-    def solicitarDiaria(self, cpf: str):
-        return False
+
+    def solicitarDiaria(self, cpf: str, professor: Professor):
+        if self.obterFuncionario(cpf):
+            func = self.obterFuncionario(cpf)
+            if isinstance(func, Professor):
+                diarias = func.obter_diarias()
+                if diarias < 3:
+                    if func.classe == 'A':
+                        func.adicionar_diarias()
+                        self.profA += 100
+                        return True
+                    if func.classe == 'B':
+                        func.adicionar_diarias()
+                        self.profB += 100
+                        return True
+                    if func.classe == 'C':
+                        func.adicionar_diarias()
+                        self.profC += 100
+                        return True
+                    if func.classe == 'D':
+                        func.adicionar_diarias()
+                        self.profD += 100
+                        return True
+                    if func.classe == 'E':
+                        func.adicionar_diarias()
+                        self.profE += 100
+                        return True
+            if isinstance(func, STA):
+                diarias = func.obter_diarias()
+                if diarias < 1:
+                    func.adicionar_diarias()
+                    self.salarioSTA += 100
+            if isinstance(func, Terceirizado):
+                return False
+
 
     def partilharLucros(self, valor: float):
-        num_funcionarios = len(self.funcionarios)
-        if num_funcionarios > 0:
-            valor_por_funcionario = valor / num_funcionarios
-            for funcionario in self.funcionarios:
-                funcionario.divisao_nos_lucros += valor_por_funcionario
-                return True
-        return False
+        if self.funcionarios:
+            self.gratif = valor/len(self.funcionarios)
 
 
     def iniciarMes(self):
-        pass
+        self.diariaProf = 0
+        self.diariaSTA = 0
+        self.gratificacao = 0
+
 
     def calcularSalarioDoFuncionario(self, cpf: str):
-        funcionario = self.obterFuncionario(cpf)
-        if funcionario:
-            salario_base = funcionario.calcularFolhaDePagamento()
-            diarias = 100 * funcionario.diarias
-            salario_total = salario_base + diarias
-            return salario_total
-        else:
-            return None
+        func = self.obterFuncionario(cpf)
+        if isinstance(func, Professor):
+            if func.classe == 'A':
+                self.folhaDePagamento += self.profA
+                return self.profA
+            if func.classe == 'B':
+                self.folhaDePagamento += self.profB
+                return self.profB
+            if func.classe == 'C':
+                self.folhaDePagamento += self.profC
+                return self.profC
+            if func.classe == 'D':
+                self.folhaDePagamento += self.profD
+                return self.profD
+            if func.classe == 'E':
+                self.folhaDePagamento += self.profE
+                return self.profE
+
+        elif isinstance(func, STA):
+            self.salarioSTA += 1000 * (100 * func.nivel)
+            return self.salarioSTA
+
+        elif isinstance(func, Terceirizado):
+            if func.insalubredade:
+                self.folhaDePagamento += self.terc_insalubre
+                return self.terc_insalubre
+            else:
+                self.folhaDePagamento += self.salario_terc
+                return self.salario_terc
 
 
     def calcularFolhaDePagamento(self):
-        for funcionario in self.funcionarios:
-            salario_total = self.calcularSalarioDoFuncionario(funcionario.cpf)
-            if salario_total is not None:
-                return salario_total
-            return False
+        return self.folhaDePagamento
