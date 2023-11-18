@@ -1,8 +1,8 @@
 import unittest
 
-from ..src.contato import Contato
-from ..src.fone import Fone
-from ..src.identificador import Identificador
+from POO.Projetos.Proj_peso3.agenda.contato import Contato
+from POO.Projetos.Proj_peso3.agenda.fone import Fone
+from POO.Projetos.Proj_peso3.agenda.identificador import Identificador
 
 
 class TestContato(unittest.TestCase):

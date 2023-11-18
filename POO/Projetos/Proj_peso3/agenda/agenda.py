@@ -1,26 +1,24 @@
-from ..src.contato import Contato
-from ..src.identificador import Identificador
+from POO.Projetos.Proj_peso3.agenda.contato import Contato
+from POO.Projetos.Proj_peso3.agenda.identificador import Identificador
 
 
 class Agenda:
+
     def __init__(self):
         self.contatos = []
         self.fones = []
 
-
     def getContatos(self) -> list:
         return sorted(self.contatos, key=lambda contato: contato.nome)
 
-
     def getQuantidadeDeContatos(self) ->  int:
         return len(self.contatos)
-
 
     def getContato(self, nome:str) -> Contato:
         for contatos in self.contatos:
             if contatos.nome == nome:
                 return contatos
-
+        return None
 
     def adicionarContato(self, contato: Contato) -> bool:
         if contato.getFones():
@@ -35,13 +33,11 @@ class Agenda:
                         self.fones = contatos.getFones()
                         return False
 
-
     def removerContato(self, nome: str) -> bool:
         for contatos in self.contatos:
             if contatos.nome == nome:
                 self.contatos.remove(contatos)
                 return True
-
 
     def removerFone(self, nome:str, index: int) -> bool:
         if index <= len(self.fones):
@@ -52,22 +48,21 @@ class Agenda:
                     return True
         return False
 
+    def getQuantidadeDeFonesPorIdentificador(self, identificador: Identificador) -> int:
+        if identificador is None:
+            return sum(len(contato.getFones()) for contato in self.contatos)
+        else:
+            return sum(
+                len([fone for fone in contato.getFones() if fone.identificador == identificador])
+                for contato in self.contatos)
 
-    def getQuantidadeDeFones(self, identificador: Identificador) -> int:
-        num = 0
-        if identificador:
-            for id in self.contatos:
-                if id == identificador:
-                    num += 1
-            return num
-
-    def getQuantidadeDeFones(self) -> int:
+    def getQuantidadeTotalDeFones(self) -> int:
         return len(self.fones)
 
-
     def pesquisar(self, expressao:str) -> list:
-        resultado = []
+        resultados = []
         for contato in self.contatos:
-            if (expressao in contato.nome or any(expressao in fone.numero for fone in contato.getFones()) or any(expressao in fone.identificador.value for fone in contato.getFones())):
-                resultado.append(contato)
-        return sorted(resultado, key=lambda contato: contato.nome)
+            if (expressao in contato.nome or any(expressao in fone.numero for fone in contato.getFones())
+                    or any(expressao in fone.identificador.value for fone in contato.getFones())):
+                resultados.append(contato)
+        return sorted(resultados, key=lambda contato: contato.nome)

@@ -1,5 +1,5 @@
 import re
-from ..src.identificador import Identificador
+from POO.Projetos.Proj_peso3.agenda.identificador import Identificador
 
 
 class Fone:

@@ -1,4 +1,4 @@
-from ..src.fone import Fone
+from POO.Projetos.Proj_peso3.agenda.fone import Fone
 
 
 class Contato:
