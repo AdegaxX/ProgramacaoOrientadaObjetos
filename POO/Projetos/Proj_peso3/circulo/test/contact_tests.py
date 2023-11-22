@@ -1,7 +1,7 @@
 import unittest
 
-from ..src.aluno.base.contato import Contato
-from ..src.aluno.g_contatos import GContatos
+from POO.Projetos.Proj_peso3.circulo.src.aluno.base.contato import Contato
+from POO.Projetos.Proj_peso3.circulo.src.aluno.g_contatos import GContatos
 
 
 class ContactTests(unittest.TestCase):

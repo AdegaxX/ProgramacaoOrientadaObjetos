@@ -1,10 +1,10 @@
 import unittest
 
-from ..src.aluno.base.circulo import Circulo
-from ..src.aluno.base.contato import Contato
-from ..src.aluno.g_contatos import GContatos
-from ..src.cliente.circulo_not_found_exception import CirculoNotFoundException
-from ..src.cliente.contato_not_found_exception import ContatoNotFoundException
+from POO.Projetos.Proj_peso3.circulo.src.aluno.base.circulo import Circulo
+from POO.Projetos.Proj_peso3.circulo.src.aluno.base.contato import Contato
+from POO.Projetos.Proj_peso3.circulo.src.aluno.g_contatos import GContatos
+from POO.Projetos.Proj_peso3.circulo.src.cliente.circulo_not_found_exception import CirculoNotFoundException
+from POO.Projetos.Proj_peso3.circulo.src.cliente.contato_not_found_exception import ContatoNotFoundException
 
 
 class ContactsCircleRelationsTest(unittest.TestCase):

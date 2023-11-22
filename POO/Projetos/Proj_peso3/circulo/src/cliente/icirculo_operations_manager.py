@@ -1,87 +1,72 @@
 from abc import ABC, abstractmethod
 
+from ..cliente.circulo_base import CirculoBase
+
 
 class ICirculoOperationsManager(ABC):
 
     @abstractmethod
-    def tie(self,idContato: str, idCirculo: str) -> bool:
+    def createCircle(self, id: str, limite: int) -> bool:
         """
-        Adiciona um contato a um circulo
+        Adiciona um circulo
         Arguments:
-            idContato: identificao do contato
-            idCirculo: identificao do do circulo
+            id do circulo: Deve ser unico
+            limite: define o maximo de contatos que esse circulo pode conter
         Returns:
-            true se o contato for adicionado ao circulo false se o circulo ja estiver cheio
-        Raises:
-            CirculoNotFoundException:
-                caso o circulo informado nao exista
-            ContatoNotFoundException:
-                caso o contato informado nao exista
+            true caso o contato seja adicionado, false se ja existir um circulo com o mesmo id
         """
         pass
 
 
     @abstractmethod
-    def untie(self,idContato: str, idCirculo: str) -> bool:
+    def updateCircle(self, circulo: CirculoBase) -> bool:
         """
-        Remove um contato de um circulo
+        Atualiza o limite do circulo
         Arguments:
-            idContato: identificao do contato
-            idCirculo: identificao do circulo
+            circulo: com o mesmo identifador e novo limite
         Returns:
-            true caso o contato seja removido, false se o contato nao estiver contido no circulo
-        Raises:
-            CirculoNotFoundException:
-                caso o circulo informado nao exista
-            ContatoNotFoundException:
-                caso o contato informado nao exista
+            true caso o circulo seja atualizado, false se o circulo com nao existir
+        """
+
+        pass
+
+    @abstractmethod
+    def getCircle(self, idCirculo: int) -> CirculoBase:
+        """
+        Retorna um circulo
+        Arguments:
+            idCirculo: id do circulo a ser recuperado
+        Returns:
+            circulo caso ele exista, None se nenhum circulo com o id informado for encontrado
         """
         pass
 
-
     @abstractmethod
-    def getContacts(self, id:str) -> list:
+    def getAllCircles(self) -> list:
         """
-        Retorna a lista de contatos ordenas por nome contido em um circulo
-        Arguments:
-            id: do circulo
+        Retorna a lista dos circulos ordenados pelo nome
+
         Returns:
-            a lista de contato contido no circulo ordenado pelo nome
-        Raises:
-            ContatoNotFoundException:
-                caso o contato informado nao exista
+            a lista dos circulos ordenados pelo nome
+
         """
         pass
 
-
-
     @abstractmethod
-    def getCircles(self, id: str) -> list:
+    def removeCircle(self, idCirculo: str) -> bool:
         """
-        Retorna a lista de circulos cujo o contato pertence
+        Remove um circulo
         Arguments:
-            id: do contato
+            idCirculo: identificador do circulo a ser removido
         Returns:
-            a lista de circulo que contem o contato ordenado pelo nome
-        Raises:
-            ContatoNotFoundException:
-                caso o contato informado nao exista
+            true caso o circulo seja removido, false se o circulo nao existir
         """
         pass
 
-
     @abstractmethod
-    def getCommomCircle(self, idContato1: str, idContato2: str)-> list:
+    def getNumberOfCircles(self) -> int:
         """
-        Retorna a lista de circulo ordenados pelo nome que os dois contatos possuem em comum
-        Arguments:
-            idContato1: identificador de um contato
-            idContato2: identificador do outro contato
         Returns:
-            a lista de circulos em comum ordenados pelo nome
-        Raises:
-            ContatoNotFoundException:
-                caso algum dos contatos nao existam
-
-           """
+            o numero de circulos cadastrados
+        """
         pass

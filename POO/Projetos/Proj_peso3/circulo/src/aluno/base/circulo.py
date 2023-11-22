@@ -1,14 +1,23 @@
-from src.cliente.circulo_base import CirculoBase
+from ....src.cliente.circulo_base import CirculoBase
 
 
 class Circulo(CirculoBase):
 
     def __init__(self, id: str, limite: int):
-        super.__init__(id, limite)
+        super().__init__(id, limite)
+        self.cttcirculo = []
 
-    def getNumeroOfContacts(self):
-        return 0
+    def getNumberOfContacts(self):
+        return len(self.cttcirculo)
 
+    def getId(self):
+        return self.id
+
+    def getLimite(self):
+        return self.limite
 
     def setLimite(self, limite: int):
-        pass
+        self.limite = limite
+
+    def __eq__(self, other):
+        return self.id == other.id
