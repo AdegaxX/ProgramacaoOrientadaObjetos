@@ -20,8 +20,8 @@ class Espiral:
         return self.quantidade
 
     def getPreco(self):
-        self.preco
+        return self.preco
 
     def setPreco(self, preco):
         self.preco = preco
-        self.preco
+        return self.preco

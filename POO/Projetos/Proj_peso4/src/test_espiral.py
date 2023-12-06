@@ -1,5 +1,7 @@
 import unittest
+
 from ..src.espiral import Espiral
+
 
 class TestEspiral(unittest.TestCase):
 
@@ -24,5 +26,5 @@ class TestEspiral(unittest.TestCase):
                          "Deve ser possível alterar a quantidade de produtos que está na espiral")
 
 
-if __name__ == '__main__':
+if name == 'main':
     unittest.main()

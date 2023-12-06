@@ -1,25 +1,25 @@
 from ..src.espiral import Espiral
 
 class Maquina:
-    def __init__(self, quantEspirais: int, maxProdutos: int):
-        self.quantEspirais = quantEspirais
-        self.maxProdutos = maxProdutos
-        self.espirais = [Espiral()] * quantEspirais
+    def __init__(self, qtdEspirais: int, maxProdutos: int):
+        self.qtdEspirais = qtdEspirais
+        self.maximoProdutos = maxProdutos
+        self.espirais = [Espiral()] * qtdEspirais
         self.saldo = 0
         self.lucro = 0
         self.troco = 0
 
-    def getFaturamento(self):
+    def getFaturamento(self) -> float:
         return self.lucro
 
-    def getMaximoProdutos(self):
-        return self.maxProdutos
+    def getMaximoProdutos(self) -> int:
+        return self.maximoProdutos
 
     def getSaldoCliente(self) -> float:
         return self.saldo
 
     def getSizeEspirais(self) -> int:
-        return self.quantEspirais
+        return self.qtdEspirais
 
     def getEspiral(self, indice: int) -> Espiral:
         if 0 <= indice < len(self.espirais):
