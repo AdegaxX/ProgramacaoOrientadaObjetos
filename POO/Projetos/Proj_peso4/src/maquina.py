@@ -12,7 +12,7 @@ class Maquina:
     def getFaturamento(self):
         return self.lucro
 
-    def getMaxProdutos(self):
+    def getMaximoProdutos(self):
         return self.maxProdutos
 
     def getSaldoCliente(self) -> float:
