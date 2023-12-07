@@ -26,5 +26,5 @@ class TestEspiral(unittest.TestCase):
                          "Deve ser possível alterar a quantidade de produtos que está na espiral")
 
 
-if name == 'main':
+if __name__ == '__main__':
     unittest.main()
